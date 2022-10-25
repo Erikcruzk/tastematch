@@ -1,0 +1,69 @@
+openapi: 3.0.3
+info:
+  title: TasteMatch - OpenAPI 3.0
+  description: |-
+    Taste Match recommendation engine API. Delivers best recipe for user.
+  termsOfService: http://terms.com
+  contact:
+    email: developers@tastematch.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+servers:
+  - url: https://localhost:3890
+paths:
+  /getrecipe:
+    get:
+      summary: Gets new recipe for user with last swipe
+      description: Update an existing pet by Id
+      parameters:
+        - name: username
+          in: query
+          description: name or uuid of user
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: recipe_id
+          in: query
+          description: name or uuid of recipe
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: recipe_like
+          in: query
+          description: name or uuid of recipe
+          required: false
+          explode: true
+          schema:
+            type: string
+            enum:
+              - like
+              - dislike
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Recipe'          
+        '400':
+          description: Unauthorized
+        '500':
+          description: Temporary error
+components:
+  schemas:
+    Recipe:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid4
+        ingredients:
+          type: array
+          items:
+            type: string
+        image:
+          type: string
