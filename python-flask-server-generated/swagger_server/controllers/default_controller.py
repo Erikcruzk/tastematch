@@ -19,4 +19,5 @@ def getrecipe_get(username=None, recipe_id=None, recipe_like=None):  # noqa: E50
 
     :rtype: Recipe
     """
-    return 'do some magic!'
+    recipe = Recipe("Pasta arrabiatta", ["spaghetti", "basil", "tomatosauce", "onion"])
+    return recipe
